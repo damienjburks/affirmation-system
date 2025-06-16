@@ -17,11 +17,11 @@ router = APIRouter(prefix="/v1", tags=["affirmation"])
 AFFIRMATION_NUMBERS = VaultSecretsLoader().load_secret("affirmation-phone-numbers")
 
 
-@router.post("/send")
-def send_message(custom_message: Optional[CustomMessage] = Body(None)):
+def send_affirmation_message(custom_message: Optional[CustomMessage] = None):
     """
-    Sends a daily affirmation via SMS.
+    Core logic to generate and send the affirmation message.
     If a custom message is provided, it will be sent instead of the generated affirmation.
+    This is also used by the scheduler to send daily affirmations.
     Args:
         custom_message (CustomMessage): Optional custom message to send.
     Returns:
@@ -47,3 +47,16 @@ def send_message(custom_message: Optional[CustomMessage] = Body(None)):
         "from": message.from_,
         "to": message.to,
     }
+
+
+@router.post("/send")
+def send_message(custom_message: Optional[CustomMessage] = Body(None)):
+    """
+    Sends a daily affirmation via SMS.
+    If a custom message is provided, it will be sent instead of the generated affirmation.
+    Args:
+        custom_message (CustomMessage): Optional custom message to send.
+    Returns:
+        dict: A dictionary containing the message SID, body, from number, and to number.
+    """
+    return send_affirmation_message(custom_message)

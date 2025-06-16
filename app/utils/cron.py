@@ -6,7 +6,7 @@ This module provides a DefaultScheduler class that uses APScheduler to run jobs 
 import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
-from routers.affirmation_v1 import send_message
+from routers.affirmation_v1 import send_affirmation_message
 
 
 class DefaultScheduler:
@@ -46,7 +46,7 @@ class DefaultScheduler:
         This method should contain the logic to generate and send affirmations.
         """
         logging.info("Running affirmation job...")
-        message = send_message()
+        message = send_affirmation_message()
         if message:
             logging.info("Affirmation sent successfully: %s", message)
         else:
