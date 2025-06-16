@@ -21,7 +21,7 @@ This is a secure, AI-powered Python application that delivers daily affirmations
 - 🧠 **OpenAI Integration** — AI-generated affirmations tailored for motivation, health, and mindset.
 - 📬 **Twilio SMS Delivery** — Sends messages directly to recipients' phones each day.
 - 🔐 **Vault Secrets** — Dynamically pulls credentials for OpenAI and Twilio from HashiCorp Vault.
-- ☸️ **Kubernetes CronJob Ready** — Scheduled as a CronJob in a K8s environment for reliable daily execution.
+- ☸️ **Runs in Kubernetes** — Deployed as a standard container, but uses **Python-based scheduling** rather than Kubernetes CronJobs.
 - 🐳 **Chainguard Base Image** — Lightweight, secure-by-default containers.
 - ✅ **CI/CD** — Automated testing and builds via GitHub Actions (`main.yml`)
 
