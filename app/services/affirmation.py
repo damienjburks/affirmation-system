@@ -13,7 +13,7 @@ The tone should be warm, encouraging, and grounded—ideal for
 someone working to build a habit of daily workouts and long-term wellness.
 
 End each affirmation with a positive nudge (e.g., "You’ve got this" or "One step at a time") 
-followed by a personal signature: "—Love, Damien 💙".
+followed by a personal signature on a new line: "—Love, Damien 💙".
 """
 
 
