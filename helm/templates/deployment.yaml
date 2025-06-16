@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: affirmation-system
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: affirmation-system
+  template:
+    metadata:
+      labels:
+        app: affirmation-system
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "affirmation-system"
+
+        # Affirmation Phone Numbers
+        vault.hashicorp.com/agent-inject-secret-affirmation-phone-numbers: "kv/data/secret/affirmation-phone-numbers"
+        vault.hashicorp.com/agent-inject-template-affirmation-phone-numbers: |
+          {{`{{- with secret "kv/data/secret/affirmation-phone-numbers" -}}`}}
+          FROM_NUMBER={{`{{ .Data.data.from_number }}`}}
+          TO_NUMBER={{`{{ .Data.data.to_number }}`}}
+          CONFIRMATION_NUMBER={{`{{ .Data.data.confirmation_number }}`}}
+          {{`{{- end }}`}}
+        
+        # OpenAI API Token
+        vault.hashicorp.com/agent-inject-secret-openai-api-token: "kv/data/secret/openai-api-token"
+        vault.hashicorp.com/agent-inject-template-openai-api-token: |
+          {{`{{- with secret "kv/data/secret/openai-api-token" -}}`}}
+          {{`{{ .Data.data.token }}`}}
+          {{`{{- end }}`}}
+
+        # Twilio Credentials
+        vault.hashicorp.com/agent-inject-secret-twilio-credentials: "kv/data/secret/twilio-credentials"
+        vault.hashicorp.com/agent-inject-template-twilio-credentials: |
+          {{`{{- with secret "kv/data/secret/twilio-credentials" -}}`}}
+          ACCOUNT_SID={{`{{ .Data.data.account_sid }}`}}
+          AUTH_TOKEN={{`{{ .Data.data.auth_token }}`}}
+          {{`{{- end }}`}}
+        
+        restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"
+    spec:
+      serviceAccountName: affirmation-system
+      automountServiceAccountToken: true
+      containers:
+        - name: affirmation-system
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: BASH_ENV
+              value: /vault/secrets/config
