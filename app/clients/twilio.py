@@ -16,7 +16,7 @@ class TwilioClient:
     def __init__(self, account_sid: str = None, auth_token: str = None):
         if account_sid is None or auth_token is None:
             loader = VaultSecretsLoader()
-            twilio_credentials = loader.load_secret("twilio-credential")
+            twilio_credentials = loader.load_secret("twilio-credentials")
             if twilio_credentials:
                 account_sid = twilio_credentials.get("ACCOUNT_SID")
                 auth_token = twilio_credentials.get("AUTH_TOKEN")

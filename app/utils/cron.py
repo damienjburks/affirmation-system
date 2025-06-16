@@ -31,8 +31,9 @@ class DefaultScheduler:
         logging.info("Starting scheduler...")
         self.scheduler.add_job(
             self._run_affirmation_job,
-            trigger=CronTrigger(hour=22, minute=0, timezone="America/Chicago"),
-            id="tfc_client_job",
+            trigger=CronTrigger(hour=7, minute=0, timezone="America/Chicago"),
+            id="affirmation_job",
+            name="Run affirmation job every day at 7:00 AM CST",
             replace_existing=True,
         )
         self.scheduler.start()
