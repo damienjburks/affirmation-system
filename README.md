@@ -5,7 +5,7 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-API-black?logo=openai&style=flat)
 ![Vault](https://img.shields.io/badge/Vault-Secrets_Management-000000?logo=hashicorp&style=flat)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployed-326CE5?logo=kubernetes&style=flat)
-![Chainguard](https://img.shields.io/badge/Secure-Base_Image-brightgreen?logo=docker&style=flat)
+![Helm Chart](https://img.shields.io/badge/Helm-Chart-blue?logo=helm)
 ![CI](https://github.com/damienjburks/affirmation-system/actions/workflows/main.yml/badge.svg?style=flat)
 ![License](https://img.shields.io/github/license/damienjburks/affirmation-system?style=flat)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat)
@@ -14,7 +14,7 @@
 
 ## 🧠 Overview
 
-This is a secure, AI-powered Python application that delivers daily affirmations via SMS. It's designed for resilience, privacy, and extensibility—built with modern cloud-native principles and deployed in Kubernetes with hardened Chainguard base images.
+This is a secure, AI-powered Python FastAPI application that delivers daily affirmations via SMS. It's designed for resilience, privacy, and extensibility. This service is built with modern cloud-native principles and deployed in Kubernetes with hardened Chainguard base images.
 
 ## 🚀 Features
 
