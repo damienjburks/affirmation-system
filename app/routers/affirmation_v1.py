@@ -38,7 +38,7 @@ def send_message(custom_message: Optional[CustomMessage] = Body(None)):
     message = twilio_client.messages.create(
         from_=AFFIRMATION_NUMBERS.get("FROM_NUMBER"),
         body=body,
-        to=AFFIRMATION_NUMBERS.get("CONFIRMATION_NUMBER"),
+        to=AFFIRMATION_NUMBERS.get("TO_NUMBER"),
     )
 
     return {
