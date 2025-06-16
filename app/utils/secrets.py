@@ -49,7 +49,7 @@ class VaultSecretsLoader:
                     return dict(
                         line.split("=", 1) for line in content.splitlines() if line
                     )
-                return f.read().strip()
+                return content
         except FileNotFoundError:
             print(
                 f"Secret file '{filename}' not found at path '{file_path}'. Is Vault Agent Injector configured?"
